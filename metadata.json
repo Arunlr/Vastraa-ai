@@ -1,0 +1,6 @@
+{
+  "name": "VastraAI: Your Indian Style AI",
+  "description": "An AI-powered Indian clothing fashion design, style quiz, lookbook and Try-On catalog platform style consultant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
