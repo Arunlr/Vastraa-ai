@@ -107,7 +107,7 @@ export function Navbar() {
                   <>
                     <div className="px-3 py-2 text-[10px] uppercase tracking-wider text-muted-foreground font-semibold border-b">Matching products</div>
                     {matches.map((p) => (
-                      <button key={p.id} type="button" suppressHydrationWarning onMouseDown={(e) => e.preventDefault()} onClick={() => goProduct(p)} className="w-full flex items-center gap-3 px-3 py-2 hover:bg-muted text-left">
+                      <button key={p.id} type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => goProduct(p)} className="w-full flex items-center gap-3 px-3 py-2 hover:bg-muted text-left">
                         <img src={p.image} alt={p.name} className="h-10 w-10 rounded object-cover" />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-medium truncate">{p.name}</div>
@@ -124,7 +124,7 @@ export function Navbar() {
                       <span className="text-muted-foreground"> — but here are better picks for you:</span>
                     </div>
                     {fallback.map((p) => (
-                      <button key={p.id} type="button" suppressHydrationWarning onMouseDown={(e) => e.preventDefault()} onClick={() => goProduct(p)} className="w-full flex items-center gap-3 px-3 py-2 hover:bg-muted text-left">
+                      <button key={p.id} type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => goProduct(p)} className="w-full flex items-center gap-3 px-3 py-2 hover:bg-muted text-left">
                         <img src={p.image} alt={p.name} className="h-10 w-10 rounded object-cover" />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-medium truncate">{p.name}</div>
@@ -147,12 +147,8 @@ export function Navbar() {
                 <User className="h-5 w-5" />
                 <span className="max-w-[80px] truncate">{user.user_metadata?.full_name ?? user.email?.split("@")[0]}</span>
               </Link>
-              {user.email?.toLowerCase() === "respectkills@gmail.com" && (
-                <Link to="/admin" title="Admin" className="p-2 hover:text-primary">
-                  <Crown className="h-4 w-4" />
-                </Link>
-              )}
-              <button onClick={signOut} suppressHydrationWarning title="Sign out" className="p-2 hover:text-primary"><LogOut className="h-4 w-4" /></button>
+              <Link to="/admin" title="Admin" className="p-2 hover:text-primary"><Crown className="h-4 w-4" /></Link>
+              <button onClick={signOut} title="Sign out" className="p-2 hover:text-primary"><LogOut className="h-4 w-4" /></button>
             </div>
           ) : (
             <Link to="/auth" className="hidden md:flex flex-col items-center text-[11px] px-3 py-1 hover:text-primary">
@@ -173,7 +169,7 @@ export function Navbar() {
             )}
             <span className="hidden md:block">Bag</span>
           </Link>
-          <button onClick={() => setMenuOpen((o) => !o)} suppressHydrationWarning className="lg:hidden p-2"><Menu className="h-5 w-5" /></button>
+          <button onClick={() => setMenuOpen((o) => !o)} className="lg:hidden p-2"><Menu className="h-5 w-5" /></button>
         </div>
       </div>
       {menuOpen && (
@@ -186,13 +182,8 @@ export function Navbar() {
             <Link to="/my-orders" onClick={() => setMenuOpen(false)}>My Orders</Link>
             <Link to="/order-history" onClick={() => setMenuOpen(false)}>Order History</Link>
             <Link to="/track-order" onClick={() => setMenuOpen(false)}>Track Order</Link>
-            {user?.email?.toLowerCase() === "respectkills@gmail.com" && (
-              <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 text-amber-400 font-semibold">
-                <Crown className="h-4 w-4 text-amber-400" /> Admin Panel
-              </Link>
-            )}
             {!user && <Link to="/auth" onClick={() => setMenuOpen(false)}>Login / Sign Up</Link>}
-            {user && <button className="text-left" suppressHydrationWarning onClick={() => { signOut(); setMenuOpen(false); }}>Sign out</button>}
+            {user && <button className="text-left" onClick={() => { signOut(); setMenuOpen(false); }}>Sign out</button>}
           </div>
         </div>
       )}
